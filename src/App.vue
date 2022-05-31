@@ -1,11 +1,17 @@
 <template>
-    <div><div >Количество лайков:{{ likes }} </div>
-    <button @click="like">like</button>
-    <button @click="dislike">dislike</button>
-    
+  <div class="app">
+    <div>Количество лайков:{{ likes }}</div>
+    <div class="likes">
+      <button @click="like">like</button>
+      <button @click="dislike">dislike</button>
     </div>
-
-  
+    <div class="posts" v-for="post in posts">
+      <div class="post">
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.content }}</p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -13,17 +19,62 @@ export default {
   data() {
     return {
       likes: 0,
-    }
+      posts: [
+        {
+          id: 1,
+          title: "post1",
+          content:
+            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, sint porro magni doloremque enim ab placeat voluptates expedita suscipit molestiae!",
+        },
+        {
+          id: 2,
+          title: "post2",
+          content:
+            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, sint porro magni doloremque enim ab placeat voluptates expedita suscipit molestiae!",
+        },
+        {
+          id: 3,
+          title: "post3",
+          content:
+            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, sint porro magni doloremque enim ab placeat voluptates expedita suscipit molestiae!",
+        },
+      ],
+    };
   },
   methods: {
-    like(){
-      this.likes++
+    like() {
+      this.likes++;
     },
-    dislike(){
-      this.likes--
-    }
-  }
+    dislike() {
+      this.likes--;
+    },
+  },
 };
 </script>
 
-<style></style>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+}
+
+.posts {
+  text-align: center;
+}
+
+.post {
+  border: 2px solid teal;
+  padding: 10px;
+  margin: 10px;
+}
+</style>
