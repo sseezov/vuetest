@@ -1,9 +1,15 @@
 <template>
   <div class="app">
+    <form action="">
+      <h1>Создание поста</h1>
+    <input type="text" class='input' placeholder="Названиие поста"/>
+    <input type="text" class='input' placeholder="Описание поста"/>
+    <button class="btn">Создать</button>
+    </form>
     <div>Количество лайков:{{ likes }}</div>
     <div class="likes">
-      <button @click="like">like</button>
-      <button @click="dislike">dislike</button>
+      <button class="btn" @click="like">like</button>
+      <button class="btn" @click="dislike">dislike</button>
     </div>
     <div class="posts" v-for="post in posts">
       <div class="post">
@@ -68,6 +74,8 @@ export default {
   flex-direction: column;
 }
 
+
+
 .posts {
   text-align: center;
 }
@@ -77,4 +85,16 @@ export default {
   padding: 10px;
   margin: 10px;
 }
+.input{
+  width: 100%;
+  border: 1px solid teal;
+  padding: 15px;
+  margin-top: 15px;
+}
+.btn{
+  margin: 5px;
+  padding: 10px;
+  float: right;
+}
+
 </style>
