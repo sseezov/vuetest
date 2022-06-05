@@ -54,7 +54,6 @@ export default {
   font-size: 20px;
   align-items: center;
   justify-content: center;
-
   flex-direction: column;
 }
 </style>

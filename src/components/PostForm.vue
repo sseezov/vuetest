@@ -13,12 +13,18 @@
       class="input"
       placeholder="Описание поста"
     />
-    <button class="btn" @click="createPost">Создать</button>
+    <my-button class="btn" @click="createPost">Создать</my-button>
   </form>
 </template>
 
 <script>
+import MyButton from "@/components/UI/MyButton.vue";
+
 export default {
+  components: {
+    MyButton,
+  },
+
   data() {
     return {
       post: {
@@ -46,13 +52,5 @@ export default {
   border: 1px solid teal;
   padding: 15px;
   margin-top: 15px;
-}
-.btn {
-  margin: 5px;
-  padding: 10px;
-  float: right;
-  background: none;
-  border: 1px solid teal;
-  cursor: pointer;
 }
 </style>
