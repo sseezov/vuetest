@@ -1,16 +1,14 @@
 <template>
   <form @submit.prevent>
     <h1>Создание поста</h1>
-    <input
+    <my-input
       v-model="post.title"
-      type="text"
-      class="input"
+      type="text"      
       placeholder="Названиие поста"
     />
-    <input
+    <my-input
       v-model="post.body"
-      type="text"
-      class="input"
+      type="text"      
       placeholder="Описание поста"
     />
     <my-button class="btn" @click="createPost">Создать</my-button>
@@ -40,11 +38,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.input {
-  width: 100%;
-  border: 1px solid teal;
-  padding: 15px;
-  margin-top: 15px;
-}
-</style>
+
