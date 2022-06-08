@@ -1,13 +1,24 @@
 <template>
   <div class="app">
-    <post-form @create="createPost" />
-    <post-list :posts="posts" @remove="removePost"/>
+    <h1>Страница с постами</h1>
+    <div class="app__btns">
+      <my-button @click="showDialog">Создать пост</my-button>
+      <my-select v-model="selectedSort" :options="sortOptions"></my-select>
+    </div>
+
+    <my-dialog v-model:show="dialogVisible"
+      ><post-form @create="createPost"
+    /></my-dialog>
+
+    <post-list :posts="posts" @remove="removePost" v-if="!isPostLoading" />
+    <div v-else>Идет загрузка</div>
   </div>
 </template>
 
 <script>
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
+import axios from "axios";
 
 export default {
   components: { PostList, PostForm },
@@ -15,21 +26,22 @@ export default {
   data() {
     return {
       likes: 0,
-      posts: [
+      posts: [],
+      dialogVisible: false,
+      isPostLoading: true,
+      selectedSort: "",
+      sortOptions: [
         {
-          id: 1,
-          title: "post1",
-          body: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, sint porro magni doloremque enim ab placeat voluptates expedita suscipit molestiae!",
+          value: "title",
+          name: "По названию",
         },
         {
-          id: 2,
-          title: "post2",
-          body: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, sint porro magni doloremque enim ab placeat voluptates expedita suscipit molestiae!",
+          value: "title",
+          name: "По описанию",
         },
         {
-          id: 3,
-          title: "post3",
-          body: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, sint porro magni doloremque enim ab placeat voluptates expedita suscipit molestiae!",
+          value: "title",
+          name: "По айди",
         },
       ],
     };
@@ -37,10 +49,28 @@ export default {
   methods: {
     createPost(post) {
       this.posts.push(post);
+      this.dialogVisible = false;
     },
-    removePost(post){
-      this.posts=this.posts.filter(p=>p.id!=post.id)
-    }
+    removePost(post) {
+      this.posts = this.posts.filter((p) => p.id != post.id);
+    },
+    showDialog() {
+      this.dialogVisible = true;
+    },
+    async fetchPosts() {
+      try {
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/posts?_limit=10"
+        );
+        this.posts = response.data;
+        this.isPostLoading = false;
+      } catch (e) {
+        alert("ошибка: " + e);
+      }
+    },
+  },
+  mounted() {
+    this.fetchPosts();
   },
 };
 </script>
@@ -58,5 +88,10 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.app__btns {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

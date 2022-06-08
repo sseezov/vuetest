@@ -1,11 +1,14 @@
 <template>
-  <div class="postList" v-show="posts.length>0">
-    <h1>Список постов</h1>
-    <post-item v-for="post in posts" :post="post" :key="post.id" @remove="$emit('remove', post)"/>
+  <div class="postList" v-show="posts.length > 0">
+    <h2>Список постов</h2>
+    <post-item
+      v-for="post in posts"
+      :post="post"
+      :key="post.id"
+      @remove="$emit('remove', post)"
+    />
   </div>
-  <h2 v-show="posts.length===0">
-    Список постов пуст
-  </h2>
+  <h2 v-show="posts.length === 0">Список постов пуст</h2>
 </template>
 
 <script>
