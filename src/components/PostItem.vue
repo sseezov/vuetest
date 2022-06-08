@@ -1,11 +1,11 @@
 <template>
   <div class="posts">
     <div class="post">
-      <h1>{{ post.title }}</h1>
-      <div class="postButtons">
-        <my-button class="btn">Удалить</my-button>
-      </div>
+      <h1>{{ post.title }}</h1>      
       <p>{{ post.body }}</p>
+      <div class="postButtons">
+        <my-button class="btn" @click="$emit('remove', post)">Удалить</my-button>
+      </div>
     </div>
   </div>
 </template>
@@ -26,8 +26,11 @@ export default {
   text-align: center;
 }
 .post {
+  display: flex;
+  flex-direction: column;
   border: 2px solid teal;
   padding: 10px;
   margin: 10px;
+  min-height: 80px;
 }
 </style>
